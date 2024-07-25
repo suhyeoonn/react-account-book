@@ -3,12 +3,16 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "./select";
+import { category } from "@/lib/placeholder-data";
 
-export default function CategorySelect() {
+interface Props {
+  type: number;
+}
+
+export default function CategorySelect({ type }: Props) {
   return (
     <Select>
       <SelectTrigger>
@@ -16,8 +20,13 @@ export default function CategorySelect() {
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
-          <SelectItem value="1">용돈</SelectItem>
-          <SelectItem value="2">월급</SelectItem>
+          {category
+            .filter((c) => c.type === type)
+            .map((c) => (
+              <SelectItem value={c.id + ""} key={c.id}>
+                {c.name}
+              </SelectItem>
+            ))}
         </SelectGroup>
       </SelectContent>
     </Select>

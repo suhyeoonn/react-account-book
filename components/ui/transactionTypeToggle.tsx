@@ -1,22 +1,29 @@
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import { TransactionType } from "@/lib/types";
+import { Dispatch, SetStateAction } from "react";
 
-export default function TransactionTypeToggle() {
+interface Props {
+  value: number;
+  onChange: (value: string) => void;
+}
+export default function TransactionTypeToggle({ value, onChange }: Props) {
   return (
     <ToggleGroup
       type="single"
       variant="outline"
       className="gap-3"
-      defaultValue="expense"
+      value={value + ""}
+      onValueChange={onChange}
     >
       <ToggleGroupItem
-        value="expense"
+        value={TransactionType.INCOME + ""}
         aria-label="Toggle Expense"
         className="flex-1 data-[state=on]:bg-blue-500 data-[state=on]:text-white"
       >
         수입
       </ToggleGroupItem>
       <ToggleGroupItem
-        value="income"
+        value={TransactionType.EXPENSE + ""}
         aria-label="Toggle Income"
         className="flex-1 data-[state=on]:bg-red-500 data-[state=on]:text-white"
       >
