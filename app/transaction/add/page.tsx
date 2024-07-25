@@ -27,12 +27,12 @@ export default function TransactionEntry() {
           <Label>내용</Label>
           <Input />
         </div>
-        <div className="flex w-full gap-2">
-          <Button type="button" variant="outline" className="flex-1" asChild>
-            <Link href="/">Cancel</Link>
-          </Button>
+        <div className="flex w-full gap-3">
           <Button type="submit" className="flex-1">
             Submit
+          </Button>
+          <Button type="button" variant="outline" asChild>
+            <Link href="/">Cancel</Link>
           </Button>
         </div>
       </form>
