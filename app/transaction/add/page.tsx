@@ -4,6 +4,7 @@ import { DatePicker } from "@/components/ui/datePicker";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import TransactionTypeToggle from "@/components/ui/transactionTypeToggle";
+import Link from "next/link";
 
 export default function TransactionEntry() {
   return (
@@ -26,7 +27,14 @@ export default function TransactionEntry() {
           <Label>내용</Label>
           <Input />
         </div>
-        <Button>Submit</Button>
+        <div className="flex w-full gap-2">
+          <Button type="button" variant="outline" className="flex-1" asChild>
+            <Link href="/">Cancel</Link>
+          </Button>
+          <Button type="submit" className="flex-1">
+            Submit
+          </Button>
+        </div>
       </form>
     </div>
   );
