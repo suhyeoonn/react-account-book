@@ -12,16 +12,12 @@ export default function CategorySelect() {
   return (
     <Select>
       <SelectTrigger>
-        <SelectValue placeholder="Select a fruit" />
+        <SelectValue placeholder="분류를 선택하세요." />
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
-          <SelectLabel>Fruits</SelectLabel>
-          <SelectItem value="apple">Apple</SelectItem>
-          <SelectItem value="banana">Banana</SelectItem>
-          <SelectItem value="blueberry">Blueberry</SelectItem>
-          <SelectItem value="grapes">Grapes</SelectItem>
-          <SelectItem value="pineapple">Pineapple</SelectItem>
+          <SelectItem value="1">용돈</SelectItem>
+          <SelectItem value="2">월급</SelectItem>
         </SelectGroup>
       </SelectContent>
     </Select>
