@@ -3,21 +3,32 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "./select";
+import { category } from "@/lib/placeholder-data";
 
-export default function CategorySelect() {
+interface Props {
+  type: number;
+  value: string;
+  onValueChange: (value: string) => void;
+}
+
+export default function CategorySelect({ type, onValueChange, value }: Props) {
   return (
-    <Select>
+    <Select onValueChange={onValueChange} value={value}>
       <SelectTrigger>
         <SelectValue placeholder="분류를 선택하세요." />
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
-          <SelectItem value="1">용돈</SelectItem>
-          <SelectItem value="2">월급</SelectItem>
+          {category
+            .filter((c) => c.type === type)
+            .map((c) => (
+              <SelectItem value={c.id + ""} key={c.id}>
+                {c.name}
+              </SelectItem>
+            ))}
         </SelectGroup>
       </SelectContent>
     </Select>
