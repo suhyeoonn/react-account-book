@@ -9,7 +9,17 @@ export interface Category {
   type: TransactionType;
 }
 
-export interface TransactionGroup {
+export interface TransactionResponse {
+  year: number;
+  month: number;
+  total: {
+    income: number;
+    expense: number;
+  };
+  dailyData: DailyTransaction[];
+}
+
+export interface DailyTransaction {
   date: Date;
   transactions: Transaction[];
 }

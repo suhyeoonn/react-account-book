@@ -1,10 +1,10 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getColorByType, sumAmont } from "@/hooks/transactionHooks";
-import { TransactionGroup, TransactionType } from "@/lib/types";
+import { DailyTransaction, TransactionType } from "@/lib/types";
 import { EXPENSE_TEXT_COLOR } from "@/lib/utils";
 
 type Props = {
-  data: TransactionGroup;
+  data: DailyTransaction;
 };
 export default function TransactionList({ data }: Props) {
   return (

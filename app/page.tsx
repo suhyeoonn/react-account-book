@@ -1,14 +1,13 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import TransactionList from "@/components/ui/transactionList";
-import { transationGroup } from "@/lib/placeholder-data";
+import { transationResponse } from "@/lib/placeholder-data";
+import { EXPENSE_TEXT_COLOR, INCOME_TEXT_COLOR } from "@/lib/utils";
 import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 
 export default function Home() {
-  const expenseTextColor = "text-red-500";
-  const incomeTextColor = "text-blue-500";
-
+  const { total, dailyData } = transationResponse;
   return (
     <main className="flex min-h-screen flex-col items-center gap-5 p-5 w-full  bg-gray-50">
       <div className="max-w-screen-lg w-full space-y-5">
@@ -31,8 +30,10 @@ export default function Home() {
             <CardHeader className="p-2 tracking-tight text-sm font-medium">
               수입
             </CardHeader>
-            <CardContent className={`${incomeTextColor} p-2 text-xl font-bold`}>
-              0,000,000원
+            <CardContent
+              className={`${INCOME_TEXT_COLOR} p-2 text-xl font-bold`}
+            >
+              {total.income}원
             </CardContent>
           </Card>
           <Card>
@@ -40,9 +41,9 @@ export default function Home() {
               지출
             </CardHeader>
             <CardContent
-              className={`${expenseTextColor} p-2 text-xl font-bold`}
+              className={`${EXPENSE_TEXT_COLOR} p-2 text-xl font-bold`}
             >
-              0,000,000원
+              {total.expense}원
             </CardContent>
           </Card>
           <Card>
@@ -50,12 +51,12 @@ export default function Home() {
               합계
             </CardHeader>
             <CardContent className="p-2 text-xl font-bold">
-              0,000,000원
+              {total.income - total.expense}원
             </CardContent>
           </Card>
         </div>
 
-        {transationGroup.map((g, i) => (
+        {dailyData.map((g, i) => (
           <TransactionList key={i} data={g} />
         ))}
       </div>
