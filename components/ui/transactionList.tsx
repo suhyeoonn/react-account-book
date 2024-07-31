@@ -1,5 +1,9 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { getColorByType, sumAmont } from "@/hooks/transactionHooks";
+import {
+  getColorByType,
+  getFormattedDate,
+  sumAmont,
+} from "@/hooks/transactionHooks";
 import { DailyTransaction, TransactionType } from "@/lib/types";
 import { EXPENSE_TEXT_COLOR } from "@/lib/utils";
 
@@ -7,15 +11,18 @@ type Props = {
   data: DailyTransaction;
 };
 export default function TransactionList({ data }: Props) {
+  const { year, month, date, day } = getFormattedDate(data.date);
   return (
     <Card className="w-full">
       <CardHeader className="border-b p-3">
         <CardTitle className="font-normal">
           <div className="flex justify-between">
             <div className="flex gap-1 items-center">
-              <span>01</span>
-              <span>금요일</span>
-              <span className="text-xs text-muted-foreground">2023.12</span>
+              <span>{date}</span>
+              <span>{day}</span>
+              <span className="text-xs text-muted-foreground">
+                {year}.{month}
+              </span>
             </div>
             <div className="flex gap-5">
               <span className="text-blue-500 font-medium">
