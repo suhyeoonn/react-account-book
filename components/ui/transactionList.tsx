@@ -1,24 +1,12 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Transaction, TransactionGroup, TransactionType } from "@/lib/types";
+import { getColorByType, sumAmont } from "@/hooks/transactionHooks";
+import { TransactionGroup, TransactionType } from "@/lib/types";
+import { EXPENSE_TEXT_COLOR } from "@/lib/utils";
 
 type Props = {
   data: TransactionGroup;
 };
 export default function TransactionList({ data }: Props) {
-  const expenseTextColor = "text-red-500";
-  const incomeTextColor = "text-blue-500";
-
-  const getColorByType = (type: TransactionType) => {
-    return type === TransactionType.INCOME ? incomeTextColor : expenseTextColor;
-  };
-
-  const sumAmont = (data: Transaction[], type: TransactionType) => {
-    return data.reduce(
-      (total, d) => (total += d.type === type ? d.amount : 0),
-      0
-    );
-  };
-
   return (
     <Card className="w-full">
       <CardHeader className="border-b p-3">
@@ -33,7 +21,7 @@ export default function TransactionList({ data }: Props) {
               <span className="text-blue-500 font-medium">
                 {sumAmont(data.transactions, TransactionType.INCOME)}원
               </span>
-              <span className={`${expenseTextColor} font-medium`}>
+              <span className={`${EXPENSE_TEXT_COLOR} font-medium`}>
                 {sumAmont(data.transactions, TransactionType.EXPENSE)}원
               </span>
             </div>
