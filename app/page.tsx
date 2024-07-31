@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import TransactionList from "@/components/ui/transactionList";
+import { transationGroup } from "@/lib/placeholder-data";
 import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 
@@ -53,8 +54,10 @@ export default function Home() {
             </CardContent>
           </Card>
         </div>
-        <TransactionList />
-        <TransactionList />
+
+        {transationGroup.map((g, i) => (
+          <TransactionList key={i} data={g} />
+        ))}
       </div>
     </main>
   );

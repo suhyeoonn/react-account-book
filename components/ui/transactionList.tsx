@@ -1,8 +1,23 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Transaction, TransactionGroup, TransactionType } from "@/lib/types";
 
-export default function TransactionList() {
+type Props = {
+  data: TransactionGroup;
+};
+export default function TransactionList({ data }: Props) {
   const expenseTextColor = "text-red-500";
   const incomeTextColor = "text-blue-500";
+
+  const getColorByType = (type: TransactionType) => {
+    return type === TransactionType.INCOME ? incomeTextColor : expenseTextColor;
+  };
+
+  const sumAmont = (data: Transaction[], type: TransactionType) => {
+    return data.reduce(
+      (total, d) => (total += d.type === type ? d.amount : 0),
+      0
+    );
+  };
 
   return (
     <Card className="w-full">
@@ -15,9 +30,11 @@ export default function TransactionList() {
               <span className="text-xs text-muted-foreground">2023.12</span>
             </div>
             <div className="flex gap-5">
-              <span className="text-blue-500 font-medium">0,000,000원</span>
+              <span className="text-blue-500 font-medium">
+                {sumAmont(data.transactions, TransactionType.INCOME)}원
+              </span>
               <span className={`${expenseTextColor} font-medium`}>
-                0,000,000원
+                {sumAmont(data.transactions, TransactionType.EXPENSE)}원
               </span>
             </div>
           </div>
@@ -25,21 +42,17 @@ export default function TransactionList() {
       </CardHeader>
       <CardContent className="p-3">
         <ul>
-          <li className="grid grid-cols-3 p-2">
-            <span className="text-sm text-muted-foreground">category</span>
-            <span className="font-medium leading-none">content</span>
-            <span className={`${incomeTextColor} text-right`}>0,000원</span>
-          </li>
-          <li className="grid grid-cols-3 p-2">
-            <span className="text-sm text-muted-foreground">category</span>
-            <span className="font-medium leading-none">content</span>
-            <span className={`${incomeTextColor} text-right`}>0,000원</span>
-          </li>
-          <li className="grid grid-cols-3 p-2">
-            <span className="text-sm text-muted-foreground">category</span>
-            <span className="font-medium leading-none">content</span>
-            <span className={`${incomeTextColor} text-right`}>0,000원</span>
-          </li>
+          {data.transactions.map((t) => (
+            <li key={t.id} className="grid grid-cols-3 p-2">
+              <span className="text-sm text-muted-foreground">
+                {t.category}
+              </span>
+              <span className="font-medium leading-none">{t.content}</span>
+              <span className={`${getColorByType(t.type)} text-right`}>
+                {t.amount}원
+              </span>
+            </li>
+          ))}
         </ul>
       </CardContent>
     </Card>

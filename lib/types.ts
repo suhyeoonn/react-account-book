@@ -8,3 +8,17 @@ export interface Category {
   name: string;
   type: TransactionType;
 }
+
+export interface TransactionGroup {
+  date: Date;
+  transactions: Transaction[];
+}
+
+export interface Transaction {
+  id: number;
+  type: TransactionType;
+  date: Date;
+  category: string;
+  content: string;
+  amount: number;
+}
