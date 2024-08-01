@@ -1,11 +1,8 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import {
-  getColorByType,
-  getFormattedDate,
-  sumAmont,
-} from "@/hooks/transactionHooks";
+import { getFormattedDate, sumAmont } from "@/hooks/transactionHooks";
 import { DailyTransaction, TransactionType } from "@/lib/types";
 import { EXPENSE_TEXT_COLOR } from "@/lib/utils";
+import TransactionListItem from "./transactionListItem";
 
 type Props = {
   data: DailyTransaction;
@@ -38,15 +35,7 @@ export default function TransactionList({ data }: Props) {
       <CardContent className="p-3">
         <ul>
           {data.transactions.map((t) => (
-            <li key={t.id} className="grid grid-cols-3 p-2">
-              <span className="text-sm text-muted-foreground">
-                {t.category}
-              </span>
-              <span className="font-medium leading-none">{t.content}</span>
-              <span className={`${getColorByType(t.type)} text-right`}>
-                {t.amount}원
-              </span>
-            </li>
+            <TransactionListItem key={t.id} data={t} />
           ))}
         </ul>
       </CardContent>
