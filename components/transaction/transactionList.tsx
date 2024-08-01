@@ -1,14 +1,24 @@
+"use client";
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getFormattedDate, sumAmont } from "@/hooks/transactionHooks";
 import { DailyTransaction, TransactionType } from "@/lib/types";
 import { EXPENSE_TEXT_COLOR } from "@/lib/utils";
 import TransactionListItem from "./transactionListItem";
+import { useState } from "react";
 
 type Props = {
   data: DailyTransaction;
 };
 export default function TransactionList({ data }: Props) {
   const { year, month, date, day } = getFormattedDate(data.date);
+  const [transactions, setTransactions] = useState(data.transactions);
+  const handleDelete = (id: number) => {
+    setTransactions(transactions.filter((t) => t.id !== id));
+  };
+
+  if (!transactions.length) return null;
+
   return (
     <Card className="w-full">
       <CardHeader className="border-b p-3">
@@ -23,10 +33,10 @@ export default function TransactionList({ data }: Props) {
             </div>
             <div className="flex gap-5">
               <span className="text-blue-500 font-medium">
-                {sumAmont(data.transactions, TransactionType.INCOME)}원
+                {sumAmont(transactions, TransactionType.INCOME)}원
               </span>
               <span className={`${EXPENSE_TEXT_COLOR} font-medium`}>
-                {sumAmont(data.transactions, TransactionType.EXPENSE)}원
+                {sumAmont(transactions, TransactionType.EXPENSE)}원
               </span>
             </div>
           </div>
@@ -34,8 +44,8 @@ export default function TransactionList({ data }: Props) {
       </CardHeader>
       <CardContent className="p-3">
         <ul>
-          {data.transactions.map((t) => (
-            <TransactionListItem key={t.id} data={t} />
+          {transactions.map((t) => (
+            <TransactionListItem key={t.id} data={t} onDelete={handleDelete} />
           ))}
         </ul>
       </CardContent>
