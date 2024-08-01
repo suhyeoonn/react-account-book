@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import TransactionList from "@/components/ui/transactionList";
+import TransactionList from "@/components/transaction/transactionList";
 import { getFormattedDate } from "@/hooks/transactionHooks";
 import { transationResponse } from "@/lib/placeholder-data";
 import { EXPENSE_TEXT_COLOR, INCOME_TEXT_COLOR } from "@/lib/utils";

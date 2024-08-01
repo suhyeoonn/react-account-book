@@ -1,4 +1,4 @@
-import { TransactionEntryForm } from "@/components/ui/transactionEntryForm";
+import { TransactionEntryForm } from "@/components/transaction/transactionEntryForm";
 
 export default function TransactionEntry() {
   return (
