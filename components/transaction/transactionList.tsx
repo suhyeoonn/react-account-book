@@ -6,6 +6,7 @@ import { DailyTransaction, TransactionType } from "@/lib/types";
 import { EXPENSE_TEXT_COLOR } from "@/lib/utils";
 import TransactionListItem from "./transactionListItem";
 import { useState } from "react";
+import CurrencyWon from "../ui/currencyInputWon";
 
 type Props = {
   data: DailyTransaction;
@@ -33,10 +34,16 @@ export default function TransactionList({ data }: Props) {
             </div>
             <div className="flex gap-5">
               <span className="text-blue-500 font-medium">
-                {sumAmont(transactions, TransactionType.INCOME)}원
+                <CurrencyWon
+                  value={sumAmont(transactions, TransactionType.INCOME)}
+                  displayType="text"
+                />
               </span>
               <span className={`${EXPENSE_TEXT_COLOR} font-medium`}>
-                {sumAmont(transactions, TransactionType.EXPENSE)}원
+                <CurrencyWon
+                  value={sumAmont(transactions, TransactionType.EXPENSE)}
+                  displayType="text"
+                />
               </span>
             </div>
           </div>

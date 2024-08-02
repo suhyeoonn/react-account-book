@@ -20,6 +20,7 @@ import { useState } from "react";
 import { TransactionType } from "@/lib/types";
 import { DatePicker } from "../ui/datePicker";
 import TransactionTypeToggle from "./transactionTypeToggle";
+import CurrencyWon from "../ui/currencyInputWon";
 
 const formSchema = z.object({
   account: z.string().min(1, {
@@ -122,7 +123,7 @@ export function TransactionEntryForm() {
             <FormItem>
               <FormLabel>금액</FormLabel>
               <FormControl>
-                <Input type="number" {...field} />
+                <CurrencyWon {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
