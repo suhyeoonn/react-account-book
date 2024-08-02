@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import TransactionList from "@/components/transaction/transactionList";
-import { getFormattedDate } from "@/hooks/transactionHooks";
+import { convertToWon, getFormattedDate } from "@/hooks/transactionHooks";
 import { transationResponse } from "@/lib/placeholder-data";
 import { EXPENSE_TEXT_COLOR, INCOME_TEXT_COLOR } from "@/lib/utils";
 import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
@@ -40,7 +40,7 @@ export default function Home() {
             <CardContent
               className={`${INCOME_TEXT_COLOR} p-2 text-xl font-bold`}
             >
-              {total.income}원
+              {convertToWon(total.income)}
             </CardContent>
           </Card>
           <Card>
@@ -50,7 +50,7 @@ export default function Home() {
             <CardContent
               className={`${EXPENSE_TEXT_COLOR} p-2 text-xl font-bold`}
             >
-              {total.expense}원
+              {convertToWon(total.expense)}
             </CardContent>
           </Card>
           <Card>
@@ -58,7 +58,7 @@ export default function Home() {
               합계
             </CardHeader>
             <CardContent className="p-2 text-xl font-bold">
-              {total.income - total.expense}원
+              {convertToWon(total.income - total.expense)}
             </CardContent>
           </Card>
         </div>

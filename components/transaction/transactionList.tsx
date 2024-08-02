@@ -1,7 +1,11 @@
 "use client";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { getFormattedDate, sumAmont } from "@/hooks/transactionHooks";
+import {
+  convertToWon,
+  getFormattedDate,
+  sumAmont,
+} from "@/hooks/transactionHooks";
 import { DailyTransaction, TransactionType } from "@/lib/types";
 import { EXPENSE_TEXT_COLOR } from "@/lib/utils";
 import TransactionListItem from "./transactionListItem";
@@ -33,10 +37,10 @@ export default function TransactionList({ data }: Props) {
             </div>
             <div className="flex gap-5">
               <span className="text-blue-500 font-medium">
-                {sumAmont(transactions, TransactionType.INCOME)}원
+                {convertToWon(sumAmont(transactions, TransactionType.INCOME))}
               </span>
               <span className={`${EXPENSE_TEXT_COLOR} font-medium`}>
-                {sumAmont(transactions, TransactionType.EXPENSE)}원
+                {convertToWon(sumAmont(transactions, TransactionType.EXPENSE))}
               </span>
             </div>
           </div>
