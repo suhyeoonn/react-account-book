@@ -25,7 +25,3 @@ export const getFormattedDate = (date: Date) => {
     day: dayjsDate.locale("ko").format("ddd") + "요일",
   };
 };
-
-export const convertToWon = (number: number) => {
-  return number.toLocaleString("ko-KR") + "원";
-};

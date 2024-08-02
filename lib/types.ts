@@ -9,13 +9,15 @@ export interface Category {
   type: TransactionType;
 }
 
+export interface TransactionMonthlyTotal {
+  income: number;
+  expense: number;
+}
+
 export interface TransactionResponse {
   year: number;
   month: number;
-  total: {
-    income: number;
-    expense: number;
-  };
+  total: TransactionMonthlyTotal;
   dailyData: DailyTransaction[];
 }
 

@@ -1,15 +1,12 @@
 "use client";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import {
-  convertToWon,
-  getFormattedDate,
-  sumAmont,
-} from "@/hooks/transactionHooks";
+import { getFormattedDate, sumAmont } from "@/hooks/transactionHooks";
 import { DailyTransaction, TransactionType } from "@/lib/types";
 import { EXPENSE_TEXT_COLOR } from "@/lib/utils";
 import TransactionListItem from "./transactionListItem";
 import { useState } from "react";
+import CurrencyWon from "../ui/currencyInputWon";
 
 type Props = {
   data: DailyTransaction;
@@ -37,10 +34,16 @@ export default function TransactionList({ data }: Props) {
             </div>
             <div className="flex gap-5">
               <span className="text-blue-500 font-medium">
-                {convertToWon(sumAmont(transactions, TransactionType.INCOME))}
+                <CurrencyWon
+                  value={sumAmont(transactions, TransactionType.INCOME)}
+                  displayType="text"
+                />
               </span>
               <span className={`${EXPENSE_TEXT_COLOR} font-medium`}>
-                {convertToWon(sumAmont(transactions, TransactionType.EXPENSE))}
+                <CurrencyWon
+                  value={sumAmont(transactions, TransactionType.EXPENSE)}
+                  displayType="text"
+                />
               </span>
             </div>
           </div>
