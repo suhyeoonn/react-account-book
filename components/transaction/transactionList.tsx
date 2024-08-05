@@ -7,12 +7,13 @@ import { EXPENSE_TEXT_COLOR } from "@/lib/utils";
 import TransactionListItem from "./transactionListItem";
 import { useState } from "react";
 import CurrencyWon from "../ui/currencyInputWon";
+import dayjs from "dayjs";
 
 type Props = {
   data: DailyTransaction;
 };
 export default function TransactionList({ data }: Props) {
-  const { year, month, date, day } = getFormattedDate(data.date);
+  const { year, month, date, day } = getFormattedDate(dayjs(data.date));
   const [transactions, setTransactions] = useState(data.transactions);
   const handleDelete = (id: number) => {
     setTransactions(transactions.filter((t) => t.id !== id));

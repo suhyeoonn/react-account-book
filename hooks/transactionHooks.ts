@@ -1,6 +1,6 @@
 import { Transaction, TransactionType } from "@/lib/types";
 import { EXPENSE_TEXT_COLOR, INCOME_TEXT_COLOR } from "@/lib/utils";
-import dayjs from "dayjs";
+import { Dayjs } from "dayjs";
 import "dayjs/locale/ko";
 
 export const getColorByType = (type: TransactionType) => {
@@ -16,12 +16,11 @@ export const sumAmont = (data: Transaction[], type: TransactionType) => {
   );
 };
 
-export const getFormattedDate = (date: Date) => {
-  const dayjsDate = dayjs(date);
+export const getFormattedDate = (date: Dayjs) => {
   return {
-    year: dayjsDate.year(),
-    month: dayjsDate.format("MM"),
-    date: dayjsDate.format("DD"),
-    day: dayjsDate.locale("ko").format("dddd"),
+    year: date.year(),
+    month: date.format("MM"),
+    date: date.format("DD"),
+    day: date.locale("ko").format("dddd"),
   };
 };
