@@ -22,6 +22,6 @@ export const getFormattedDate = (date: Date) => {
     year: dayjsDate.year(),
     month: dayjsDate.format("MM"),
     date: dayjsDate.format("DD"),
-    day: dayjsDate.locale("ko").format("ddd") + "요일",
+    day: dayjsDate.locale("ko").format("dddd"),
   };
 };
