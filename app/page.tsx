@@ -1,16 +1,12 @@
 import { Button } from "@/components/ui/button";
-import TransactionList from "@/components/transaction/transactionList";
-import { getFormattedDate } from "@/hooks/transactionHooks";
-import { transationResponse } from "@/lib/placeholder-data";
 import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
-import MonthlySummary from "@/components/transaction/monthlySummary";
+
+import MonthlyTransaction from "@/components/transaction/monthlyTransaction";
 
 export default function Home() {
-  const { total, dailyData } = transationResponse;
-  const { year, month } = getFormattedDate(
-    new Date(transationResponse.year, transationResponse.month - 1, 1)
-  );
+  let year = 2024;
+  let month = 7;
 
   return (
     <main className="flex min-h-screen flex-col items-center gap-5 p-5 w-full  bg-gray-50">
@@ -31,11 +27,7 @@ export default function Home() {
             <Link href="/transaction/add">Add</Link>
           </Button>
         </div>
-        <MonthlySummary total={total} />
-
-        {dailyData.map((g, i) => (
-          <TransactionList key={i} data={g} />
-        ))}
+        <MonthlyTransaction year={year} month={month} />
       </div>
     </main>
   );

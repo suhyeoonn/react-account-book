@@ -15,8 +15,6 @@ export interface TransactionMonthlyTotal {
 }
 
 export interface TransactionResponse {
-  year: number;
-  month: number;
   total: TransactionMonthlyTotal;
   dailyData: DailyTransaction[];
 }
