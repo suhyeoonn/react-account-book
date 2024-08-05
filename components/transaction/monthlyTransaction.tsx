@@ -5,23 +5,19 @@ import { useEffect, useState } from "react";
 import { TransactionResponse } from "@/lib/types";
 import TransactionList from "@/components/transaction/transactionList";
 import { monthlyTransactions } from "@/lib/placeholder-data";
+import { Dayjs } from "dayjs";
 
-export default function MonthlyTransaction({
-  year,
-  month,
-}: {
-  year: number;
-  month: number;
-}) {
+export default function MonthlyTransaction({ date }: { date: Dayjs }) {
   const [data, setData] = useState<TransactionResponse>();
   useEffect(() => {
     setData(
-      monthlyTransactions.find((t) => t.year === year && t.month === month)
-        ?.data || undefined
+      monthlyTransactions.find(
+        (t) => t.year === date.year() && t.month === date.month() + 1
+      )?.data || undefined
     );
-  }, [year, month]);
+  }, [date]);
 
-  if (!data) return null;
+  if (!data) return <p>거래 내역이 없습니다.</p>;
 
   const { total, dailyData } = data;
 
