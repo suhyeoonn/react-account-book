@@ -1,12 +1,31 @@
 "use client";
 
-import { category } from "@/lib/placeholder-data";
-import { TransactionType } from "@/lib/types";
+import { category as dummy } from "@/lib/placeholder-data";
+import { Category, TransactionType } from "@/lib/types";
+import CategoryForm from "./categoryForm";
+import { useEffect, useState } from "react";
 
 export default function CategoryList({ type }: { type: TransactionType }) {
+  const [categoryList, setCategoryList] = useState<Category[]>([]);
+
+  useEffect(() => {
+    setCategoryList(dummy);
+  }, [type]);
+
+  const addCategory = (categoryName: string) => {
+    setCategoryList([
+      ...categoryList,
+      {
+        id: categoryList.length + 1,
+        name: categoryName,
+        type,
+      },
+    ]);
+  };
+
   return (
     <ul>
-      {category
+      {categoryList
         .filter((c) => c.type === type)
         .map((c) => (
           <li
@@ -16,12 +35,7 @@ export default function CategoryList({ type }: { type: TransactionType }) {
             {c.name}
           </li>
         ))}
-      <button
-        onClick={() => alert("click")}
-        className="flex cursor-pointer p-2 opacity-0 transition hover:opacity-100 w-full text-sm text-red-500 justify-center font-medium items-center before:bg-red-500 before:h-px before:flex-grow before:mr-3 after:bg-red-500 after:h-px after:flex-grow after:ml-3"
-      >
-        카테고리 추가
-      </button>
+      <CategoryForm onSubmit={addCategory} />
     </ul>
   );
 }
