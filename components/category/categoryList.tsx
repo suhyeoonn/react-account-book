@@ -4,6 +4,7 @@ import { category as dummy } from "@/lib/placeholder-data";
 import { Category, TransactionType } from "@/lib/types";
 import CategoryForm from "./categoryForm";
 import { useEffect, useState } from "react";
+import CategoryListItem from "./categoryListItem";
 
 export default function CategoryList({ type }: { type: TransactionType }) {
   const [categoryList, setCategoryList] = useState<Category[]>([]);
@@ -23,17 +24,16 @@ export default function CategoryList({ type }: { type: TransactionType }) {
     ]);
   };
 
+  const deleteCategory = (id: number) => {
+    setCategoryList(categoryList.filter((c) => c.id !== id));
+  };
+
   return (
     <ul>
       {categoryList
         .filter((c) => c.type === type)
         .map((c) => (
-          <li
-            key={c.id}
-            className="hover:bg-gray-100 cursor-pointer p-2 border-b"
-          >
-            {c.name}
-          </li>
+          <CategoryListItem key={c.id} category={c} onDelete={deleteCategory} />
         ))}
       <CategoryForm onSubmit={addCategory} />
     </ul>

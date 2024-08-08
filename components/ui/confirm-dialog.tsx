@@ -8,29 +8,30 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
+import { ReactNode } from "react";
 
 export default function ConfirmDialog({
-  title,
-  description,
+  description = "",
   open,
   onOpenChange,
   cancelText = "취소",
   actionText = "확인",
   onClick,
+  children,
 }: {
-  title: string;
-  description: string;
+  description?: string;
   open: boolean;
   onOpenChange: (open: boolean) => void;
   cancelText?: string;
   actionText?: string;
   onClick: Function;
+  children: ReactNode;
 }) {
   return (
     <AlertDialog open={open} onOpenChange={onOpenChange}>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>{title}</AlertDialogTitle>
+          <AlertDialogTitle>{children}</AlertDialogTitle>
           <AlertDialogDescription>{description}</AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
