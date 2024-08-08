@@ -33,11 +33,12 @@ export default function TransactionListItem({
       <ConfirmDialog
         open={open}
         onOpenChange={setOpen}
-        title="거래 내역을 삭제하시겠습니까?"
         description="삭제를 누르면 거래 내역이 삭제됩니다."
         actionText="삭제"
         onClick={() => onDelete(data.id)}
-      />
+      >
+        거래 내역을 삭제하시겠습니까?
+      </ConfirmDialog>
     </li>
   );
 }
