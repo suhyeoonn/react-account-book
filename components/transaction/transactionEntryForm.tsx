@@ -136,7 +136,7 @@ export function TransactionEntryForm() {
             <FormItem>
               <FormLabel>내용</FormLabel>
               <FormControl>
-                <Input {...field} />
+                <Input {...field} className="bg-white" />
               </FormControl>
             </FormItem>
           )}
