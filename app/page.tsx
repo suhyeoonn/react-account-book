@@ -16,7 +16,7 @@ export default function Home() {
   };
 
   return (
-    <main className="flex min-h-screen flex-col items-center gap-5 p-5 w-full  bg-gray-50">
+    <main className="flex min-h-screen flex-col items-center gap-5 p-5 w-full">
       <div className="max-w-screen-lg w-full space-y-5">
         <div className="flex justify-between w-full items-center">
           <DateController changeMonth={handleMonth} date={date} />

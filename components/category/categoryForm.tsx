@@ -27,9 +27,10 @@ export default function CategoryForm({
         onClick={() => handleVisibleForm(true)}
         className={cx(
           "flex p-2 opacity-0 transition duration-300  w-full text-sm text-red-500 justify-center font-medium items-center before:bg-red-500 before:h-px before:flex-grow before:mr-3 after:bg-red-500 after:h-px after:flex-grow after:ml-3",
-          isShow
-            ? "hover:opacity-0 cursor-default"
-            : "cursor-pointer hover:opacity-100 "
+          {
+            "hover:opacity-0 cursor-default": isShow,
+            "cursor-pointer hover:opacity-100 ": !isShow,
+          }
         )}
       >
         카테고리 추가

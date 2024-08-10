@@ -17,7 +17,7 @@ interface Props {
 export default function CategorySelect({ type, onValueChange, value }: Props) {
   return (
     <Select onValueChange={onValueChange} value={value}>
-      <SelectTrigger>
+      <SelectTrigger className="bg-white">
         <SelectValue placeholder="분류를 선택하세요." />
       </SelectTrigger>
       <SelectContent>
