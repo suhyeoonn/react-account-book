@@ -10,7 +10,7 @@ export default function CurrencyWon({
 }) {
   return (
     <NumericFormat
-      className="bg-white"
+      className="bg-inherit"
       customInput={Input}
       thousandSeparator
       {...props}

@@ -50,7 +50,7 @@ export default function TransactionList({ data }: Props) {
           </div>
         </CardTitle>
       </CardHeader>
-      <CardContent className="p-3">
+      <CardContent className="p-0">
         <ul>
           {transactions.map((t) => (
             <TransactionListItem key={t.id} data={t} onDelete={handleDelete} />

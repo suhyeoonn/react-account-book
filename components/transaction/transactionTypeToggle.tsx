@@ -18,14 +18,14 @@ export default function TransactionTypeToggle({ value, onChange }: Props) {
       <ToggleGroupItem
         value={TransactionType.INCOME + ""}
         aria-label="Toggle Expense"
-        className="bg-white flex-1 data-[state=on]:bg-blue-500 data-[state=on]:text-white"
+        className="flex-1 data-[state=on]:bg-blue-500 data-[state=on]:text-white"
       >
         수입
       </ToggleGroupItem>
       <ToggleGroupItem
         value={TransactionType.EXPENSE + ""}
         aria-label="Toggle Income"
-        className="bg-white flex-1 data-[state=on]:bg-red-500 data-[state=on]:text-white"
+        className="flex-1 data-[state=on]:bg-red-500 data-[state=on]:text-white"
       >
         지출
       </ToggleGroupItem>
