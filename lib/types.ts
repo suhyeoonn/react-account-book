@@ -32,3 +32,12 @@ export interface Transaction {
   content: string;
   amount: number;
 }
+
+export interface TransactionForm {
+  id: number | null;
+  type: TransactionType;
+  date: Date;
+  category: string;
+  content: string;
+  amount: string;
+}

@@ -16,7 +16,7 @@ export default function TransactionListItem({
 }) {
   const [open, setOpen] = useState(false);
 
-  const handleClick = (e: Event) => {
+  const handleClick = (e: React.MouseEvent) => {
     e.preventDefault();
     setOpen(!open);
   };

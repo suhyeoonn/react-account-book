@@ -26,4 +26,5 @@ const CurrencyWon = forwardRef(
   }
 );
 
+CurrencyWon.displayName = "CurrencyWon";
 export default CurrencyWon;

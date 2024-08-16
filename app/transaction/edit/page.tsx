@@ -1,7 +1,7 @@
 "use client";
 
 import { TransactionEntryForm } from "@/components/transaction/transactionEntryForm";
-import { TransactionType } from "@/lib/types";
+import { TransactionForm, TransactionType } from "@/lib/types";
 
 export default function TransactionEdit() {
   const data = {
@@ -14,7 +14,7 @@ export default function TransactionEdit() {
   };
   const { category, amount } = data;
 
-  const updateData = (data) => {
+  const updateData = (data: TransactionForm) => {
     alert("updateData");
     console.log(data);
   };

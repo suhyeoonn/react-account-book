@@ -17,7 +17,7 @@ import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import CategorySelect from "../ui/CategorySelect";
 import { useState } from "react";
-import { TransactionType } from "@/lib/types";
+import { TransactionForm, TransactionType } from "@/lib/types";
 import { DatePicker } from "../ui/datePicker";
 import TransactionTypeToggle from "./transactionTypeToggle";
 import CurrencyWon from "../ui/currencyInputWon";
@@ -47,7 +47,8 @@ export function TransactionEntryForm({
   },
   handleSubmit,
 }: {
-  handleSubmit: (data: object) => void;
+  data?: TransactionForm;
+  handleSubmit: (data: TransactionForm) => void;
 }) {
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
@@ -59,7 +60,7 @@ export function TransactionEntryForm({
   function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    handleSubmit({ ...data, amount: parseInt(values.amount) });
+    handleSubmit({ ...data });
   }
 
   const [type, setType] = useState(data.type);
