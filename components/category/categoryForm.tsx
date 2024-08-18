@@ -1,13 +1,12 @@
+"use client";
+
 import { useState } from "react";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { cx } from "class-variance-authority";
+import { createCategory } from "@/lib/actions";
 
-export default function CategoryForm({
-  onSubmit,
-}: {
-  onSubmit: (categoryName: string) => void;
-}) {
+export default function CategoryForm() {
   const [isShow, setIsShow] = useState(false);
   const [value, setValue] = useState("");
 
@@ -15,10 +14,10 @@ export default function CategoryForm({
     setIsShow(state);
   };
 
-  const handleCategoryAdd = () => {
+  const handleCategoryAdd = (formData: FormData) => {
     setValue("");
-    onSubmit(value);
     handleVisibleForm(false);
+    createCategory(formData);
   };
 
   return (
@@ -36,21 +35,23 @@ export default function CategoryForm({
         카테고리 추가
       </button>
       {isShow && (
-        <div className="flex flex-col gap-3">
+        <form action={handleCategoryAdd} className="flex flex-col gap-3">
           <Input
             placeholder="카테고리 이름 입력"
             value={value}
             onChange={({ target }) => setValue(target.value)}
+            name="name"
           />
+          <input type="hidden" value={0} name="type" />
           <div className="space-x-3">
-            <Button onClick={handleCategoryAdd} disabled={!value}>
+            <Button type="submit" disabled={!value}>
               Add
             </Button>
             <Button variant="outline" onClick={() => handleVisibleForm(false)}>
               Cancel
             </Button>
           </div>
-        </div>
+        </form>
       )}
     </div>
   );

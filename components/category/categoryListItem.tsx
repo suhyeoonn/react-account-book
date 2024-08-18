@@ -1,3 +1,5 @@
+"use client";
+
 import useHover from "@/hooks/useHover";
 import { cx } from "class-variance-authority";
 import { Button } from "../ui/button";
@@ -5,14 +7,9 @@ import { TrashIcon } from "@radix-ui/react-icons";
 import useToggle from "@/hooks/useToggle";
 import ConfirmDialog from "../ui/confirm-dialog";
 import { Category } from "@/lib/types";
+import { deleteCategory } from "@/lib/actions";
 
-export default function CategoryListItem({
-  category,
-  onDelete,
-}: {
-  category: Category;
-  onDelete: (id: number) => void;
-}) {
+export default function CategoryListItem({ category }: { category: Category }) {
   const [isHovered, ref] = useHover<HTMLLIElement>();
   const [state, toggle] = useToggle(false);
 
@@ -20,7 +17,7 @@ export default function CategoryListItem({
 
   const handleDelete = () => {
     toggle();
-    onDelete(id);
+    deleteCategory(id);
   };
 
   return (
