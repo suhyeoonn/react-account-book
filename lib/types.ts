@@ -33,6 +33,10 @@ export interface Transaction {
   amount: number;
 }
 
+export type AddTransaction = Omit<Transaction, "id" | "category"> & {
+  categoryId: number;
+};
+
 export interface TransactionForm {
   id: number | null;
   type: TransactionType;

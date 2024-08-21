@@ -10,13 +10,11 @@ import { category } from "@/lib/placeholder-data";
 
 interface Props {
   type: number;
-  value: string;
-  onValueChange: (value: string) => void;
 }
 
-export default function CategorySelect({ type, onValueChange, value }: Props) {
+export default function CategorySelect({ type }: Props) {
   return (
-    <Select onValueChange={onValueChange} value={value}>
+    <Select name="category">
       <SelectTrigger className="bg-white">
         <SelectValue placeholder="분류를 선택하세요." />
       </SelectTrigger>

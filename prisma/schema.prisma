@@ -28,6 +28,6 @@ model Transaction {
   type Int
   date DateTime
   categoryId Int
-  content String
+  content String?
   amount Int
 }
