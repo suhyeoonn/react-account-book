@@ -1,12 +1,8 @@
 "use client";
 
 import { TransactionEntryForm } from "@/components/transaction/transactionEntryForm";
-import { TransactionForm } from "@/lib/types";
+import { addTransaction } from "@/lib/actions";
 
 export default function TransactionEntry() {
-  const createData = (data: TransactionForm) => {
-    alert("createData");
-    console.log(data);
-  };
-  return <TransactionEntryForm handleSubmit={createData} />;
+  return <TransactionEntryForm handleSubmit={addTransaction} />;
 }

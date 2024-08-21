@@ -29,6 +29,7 @@ export default function TransactionTypeToggle({ value, onChange }: Props) {
       >
         지출
       </ToggleGroupItem>
+      <input type="hidden" name="type" value={value} />
     </ToggleGroup>
   );
 }
