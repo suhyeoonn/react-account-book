@@ -10,8 +10,24 @@ datasource db {
   directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
+// NOTE: 
+// Create the tables in your database based on your Prisma schema.
+// npx prisma db push
+// 
+// Regenerate your Prisma Schema.
+// npx prisma generate
+
 model Category {
     id Int @default(autoincrement()) @id
     name String
     type Int
+}
+
+model Transaction {
+  id BigInt @default(autoincrement()) @id
+  type Int
+  date DateTime
+  categoryId Int
+  content String
+  amount Int
 }
