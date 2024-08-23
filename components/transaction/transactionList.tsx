@@ -2,12 +2,12 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getFormattedDate, sumAmont } from "@/hooks/transactionHooks";
-import { DailyTransaction, Transaction, TransactionType } from "@/lib/types";
+import { Transaction, TransactionType } from "@/lib/types";
 import { EXPENSE_TEXT_COLOR } from "@/lib/utils";
 import TransactionListItem from "./transactionListItem";
-import { useState } from "react";
 import CurrencyWon from "../ui/currencyInputWon";
 import dayjs from "dayjs";
+import axios from "axios";
 
 type Props = {
   dateString: string;
@@ -15,10 +15,16 @@ type Props = {
 };
 export default function TransactionList({ dateString, transactions }: Props) {
   const { year, month, date, day } = getFormattedDate(dayjs(dateString));
-  // const [transactions, setTransactions] = useState(data);
-  const handleDelete = (id: string) => {
-    TODO: alert("TODO");
-    // setTransactions(transactions.filter((t) => t.id !== id));
+
+  const handleDelete = async (id: string) => {
+    try {
+      await axios.delete(`/api/transaction/${id}`);
+      alert("삭제되었습니다");
+      // TODO: 삭제 후 데이터 리로드
+    } catch (err) {
+      alert("Network Error");
+      console.error(err);
+    }
   };
 
   if (!transactions.length) return null;
