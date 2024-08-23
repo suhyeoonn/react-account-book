@@ -9,6 +9,7 @@ import Link from "next/link";
 import { useState } from "react";
 
 export default function Home() {
+  // TODO context
   const [date, setDate] = useState(dayjs());
 
   const handleMonth = (value: number) => {

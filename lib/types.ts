@@ -16,16 +16,13 @@ export interface TransactionMonthlyTotal {
 
 export interface TransactionResponse {
   total: TransactionMonthlyTotal;
-  dailyData: DailyTransaction[];
+  dailyData: DailyTransaction;
 }
 
-export interface DailyTransaction {
-  date: Date;
-  transactions: Transaction[];
-}
+export type DailyTransaction = { [date: string]: Transaction[] };
 
 export interface Transaction {
-  id: number;
+  id: string;
   type: TransactionType;
   date: Date;
   category: string;
