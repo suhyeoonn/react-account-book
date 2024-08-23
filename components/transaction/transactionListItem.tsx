@@ -12,7 +12,7 @@ export default function TransactionListItem({
   onDelete,
 }: {
   data: Transaction;
-  onDelete: (id: number) => void;
+  onDelete: (id: string) => void;
 }) {
   const [open, setOpen] = useState(false);
 

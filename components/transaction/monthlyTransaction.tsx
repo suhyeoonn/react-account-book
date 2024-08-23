@@ -4,17 +4,19 @@ import MonthlySummary from "@/components/transaction/monthlySummary";
 import { useEffect, useState } from "react";
 import { TransactionResponse } from "@/lib/types";
 import TransactionList from "@/components/transaction/transactionList";
-import { monthlyTransactions } from "@/lib/placeholder-data";
 import { Dayjs } from "dayjs";
+import axios from "axios";
 
 export default function MonthlyTransaction({ date }: { date: Dayjs }) {
   const [data, setData] = useState<TransactionResponse>();
   useEffect(() => {
-    setData(
-      monthlyTransactions.find(
-        (t) => t.year === date.year() && t.month === date.month() + 1
-      )?.data || undefined
-    );
+    (async () => {
+      const { data } = await axios("/api/transactions", {
+        params: { year: date.year(), month: date.month() },
+      });
+      console.log(data);
+      setData(data);
+    })();
   }, [date]);
 
   if (!data) return <p>거래 내역이 없습니다.</p>;
@@ -25,8 +27,12 @@ export default function MonthlyTransaction({ date }: { date: Dayjs }) {
     <>
       <MonthlySummary total={total} />
 
-      {dailyData.map((g, i) => (
-        <TransactionList key={i} data={g} />
+      {Object.keys(dailyData).map((key, i) => (
+        <TransactionList
+          key={i}
+          dateString={key}
+          transactions={dailyData[key]}
+        />
       ))}
     </>
   );
