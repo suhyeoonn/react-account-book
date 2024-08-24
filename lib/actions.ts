@@ -3,7 +3,7 @@
 import { redirect } from "next/navigation";
 import prisma from "./prisma";
 import { revalidatePath } from "next/cache";
-import { AddTransaction } from "./types";
+import { FormTransaction } from "./types";
 
 export const getCategoryList = async () => {
   return await prisma.category.findMany();
@@ -35,7 +35,7 @@ export const deleteCategory = async (id: number) => {
 };
 
 export const addTransaction = async (formData: FormData) => {
-  const transaction: AddTransaction = {
+  const transaction: FormTransaction = {
     date: new Date(formData.get("date") as string),
     type: Number(formData.get("type")),
     categoryId: Number(formData.get("categoryId")),
@@ -59,14 +59,25 @@ export const fetchTransaction = async (id: string) => {
   }
 };
 
-export const patchTransaction = async (id: string) => {
+export const patchTransaction = async (id: string, formData: FormData) => {
+  const transaction: FormTransaction = {
+    date: new Date(formData.get("date") as string),
+    type: Number(formData.get("type")),
+    categoryId: Number(formData.get("categoryId")),
+    amount: parseInt((formData.get("amount") as string).replace(/,/g, "")),
+    content: formData.get("content") as string,
+  };
+
   try {
-    // return await prisma.transaction.update({
-    //   where: {
-    //     id: BigInt(id),
-    //   },
-    // });
+    await prisma.transaction.update({
+      where: {
+        id: BigInt(id),
+      },
+      data: { ...transaction },
+    });
   } catch (err) {
     console.error(err);
   }
+
+  redirect("/");
 };
