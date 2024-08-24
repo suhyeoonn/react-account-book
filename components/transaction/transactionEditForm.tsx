@@ -10,6 +10,7 @@ import { DatePicker } from "../ui/datePicker";
 import TransactionTypeToggle from "./transactionTypeToggle";
 import CurrencyWon from "../ui/currencyInputWon";
 import { Label } from "@radix-ui/react-label";
+import dayjs from "dayjs";
 
 // const formSchema = z.object({
 //   amount: z.string().min(1, {
@@ -25,7 +26,7 @@ import { Label } from "@radix-ui/react-label";
 //   content: z.string(),
 // });
 
-export function TransactionEntryForm({
+export function TransactionEditForm({
   data = {
     id: null,
     amount: "",
@@ -36,12 +37,16 @@ export function TransactionEntryForm({
   },
   handleSubmit,
 }: {
-  data?: TransactionForm;
+  data: TransactionForm;
   handleSubmit: (form: FormData) => void;
 }) {
   const [type, setType] = useState(data.type);
   const handleType = (value: string) => {
     setType(+value);
+  };
+
+  const changeHandler = (e) => {
+    setData;
   };
 
   return (
@@ -58,20 +63,20 @@ export function TransactionEntryForm({
             type="date"
             id="date"
             name="date"
-            defaultValue={new Date().toISOString().split("T")[0]}
+            defaultValue={dayjs(data.date).format("YYYY-MM-DD")}
           />
         </div>
         <div className="flex flex-col gap-2">
           <Label>분류</Label>
-          <CategorySelect type={type} />
+          <CategorySelect type={type} defaultValue={data.categoryId} />
         </div>
         <div className="flex flex-col gap-2">
           <Label>금액</Label>
-          <CurrencyWon name="amount" />
+          <CurrencyWon name="amount" defaultValue={data.amount} />
         </div>
         <div className="flex flex-col gap-2">
           <Label>내용</Label>
-          <Input name="content" />
+          <Input name="content" defaultValue={data.content} />
         </div>
         <div className="flex w-full gap-3">
           <Button type="submit" className="flex-1">
