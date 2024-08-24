@@ -30,7 +30,7 @@ export interface Transaction {
   amount: number;
 }
 
-export type AddTransaction = Omit<Transaction, "id" | "category"> & {
+export type FormTransaction = Omit<Transaction, "id" | "category"> & {
   categoryId: number;
 };
 

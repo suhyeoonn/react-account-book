@@ -15,7 +15,7 @@ interface Props {
 
 export default function CategorySelect({ type, defaultValue }: Props) {
   return (
-    <Select name="category" defaultValue={defaultValue}>
+    <Select name="categoryId" defaultValue={defaultValue}>
       <SelectTrigger className="bg-white">
         <SelectValue placeholder="분류를 선택하세요." />
       </SelectTrigger>

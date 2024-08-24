@@ -9,6 +9,8 @@ export default async function TransactionEdit({
   const { id } = params;
   const data = await fetchTransaction(id);
 
+  const updateWithId = patchTransaction.bind(null, id);
+
   return (
     <TransactionEditForm
       data={{
@@ -16,7 +18,7 @@ export default async function TransactionEdit({
         categoryId: "" + data?.categoryId,
         amount: "" + data?.amount,
       }}
-      handleSubmit={patchTransaction}
+      handleSubmit={updateWithId}
     />
   );
 }
