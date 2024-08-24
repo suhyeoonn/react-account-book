@@ -6,6 +6,7 @@ import { Cross2Icon } from "@radix-ui/react-icons";
 import ConfirmDialog from "../ui/confirm-dialog";
 import { useState } from "react";
 import CurrencyWon from "../ui/currencyInputWon";
+import Link from "next/link";
 
 export default function TransactionListItem({
   data,
@@ -23,8 +24,8 @@ export default function TransactionListItem({
 
   return (
     <li>
-      <a
-        href="/transaction/edit"
+      <Link
+        href={`/transaction/${data.id}/edit`}
         className="grid grid-cols-[auto_1fr_1fr_1fr] p-3 py-2 gap-2 items-center cursor-pointer hover:bg-secondary"
       >
         <span className="text-destructive text-right hover:bg-destructive hover:text-white rounded p-1 cursor-pointer">
@@ -44,7 +45,7 @@ export default function TransactionListItem({
         >
           거래 내역을 삭제하시겠습니까?
         </ConfirmDialog>
-      </a>
+      </Link>
     </li>
   );
 }

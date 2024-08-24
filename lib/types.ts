@@ -38,7 +38,7 @@ export interface TransactionForm {
   id: number | null;
   type: TransactionType;
   date: Date;
-  category: string;
+  categoryId: string;
   content: string;
   amount: string;
 }

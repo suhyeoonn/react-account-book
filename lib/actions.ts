@@ -38,11 +38,35 @@ export const addTransaction = async (formData: FormData) => {
   const transaction: AddTransaction = {
     date: new Date(formData.get("date") as string),
     type: Number(formData.get("type")),
-    categoryId: Number(formData.get("category")),
+    categoryId: Number(formData.get("categoryId")),
     amount: parseInt((formData.get("amount") as string).replace(/,/g, "")),
     content: formData.get("content") as string,
   };
   await prisma.transaction.create({ data: transaction });
 
   redirect("/");
+};
+
+export const fetchTransaction = async (id: string) => {
+  try {
+    return await prisma.transaction.findFirst({
+      where: {
+        id: BigInt(id),
+      },
+    });
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const patchTransaction = async (id: string) => {
+  try {
+    // return await prisma.transaction.update({
+    //   where: {
+    //     id: BigInt(id),
+    //   },
+    // });
+  } catch (err) {
+    console.error(err);
+  }
 };
