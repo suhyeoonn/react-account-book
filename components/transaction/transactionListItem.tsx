@@ -31,8 +31,12 @@ export default function TransactionListItem({
         <span className="text-destructive text-right hover:bg-destructive hover:text-white rounded p-1 cursor-pointer">
           <Cross2Icon onClick={handleClick} />
         </span>
-        <span className="text-sm text-muted-foreground">{data.category}</span>
-        <span className="font-medium leading-none">{data.content}</span>
+        <span className="text-sm text-muted-foreground">
+          {data.category.name}
+        </span>
+        <span className="font-medium leading-none">
+          {data.content || data.category.name}
+        </span>
         <span className={`${getColorByType(data.type)} text-right`}>
           <CurrencyWon value={data.amount} displayType="text" />
         </span>

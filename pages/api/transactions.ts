@@ -46,6 +46,14 @@ function groupTransactionsByDate(data: Transaction[]) {
 
 async function findTransactions(startDate: Date, endDate: Date) {
   const data = await prisma.transaction.findMany({
+    include: {
+      category: {
+        select: {
+          id: true,
+          name: true,
+        },
+      },
+    },
     where: {
       date: {
         gte: startDate,

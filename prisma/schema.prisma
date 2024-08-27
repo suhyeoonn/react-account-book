@@ -21,13 +21,15 @@ model Category {
     id Int @default(autoincrement()) @id
     name String
     type Int
+    Transaction Transaction[]
 }
 
 model Transaction {
   id BigInt @default(autoincrement()) @id
   type Int
   date DateTime
-  categoryId Int
+  category Category @relation(fields: [categoryId], references: [id])
+  categoryId Int 
   content String?
   amount Int
 }
