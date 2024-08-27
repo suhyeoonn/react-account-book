@@ -14,15 +14,22 @@ export default async function handler(
   }
 
   const startDate = new Date(+year, +month, 1);
-  const data = await prisma.transaction.findMany({
-    where: {
-      date: {
-        gte: startDate,
-        lte: dayjs(startDate).add(1, "M").subtract(1, "d").toDate(),
-      },
-    },
-  });
+  const endDate = dayjs(startDate).add(1, "M").subtract(1, "d").toDate();
 
+  const data = await findTransactions(startDate, endDate);
+
+  const [income, expense] = await calculateTotal(startDate, endDate);
+
+  return res.status(200).json({
+    total: {
+      income: income._sum.amount || 0,
+      expense: expense._sum.amount || 0,
+    },
+    dailyData: groupTransactionsByDate(data),
+  });
+}
+
+function groupTransactionsByDate(data: Transaction[]) {
   const dataMap = new Map();
 
   data.forEach((d) => {
@@ -34,16 +41,39 @@ export default async function handler(
     const mapDataByDate = dataMap.get(date);
     dataMap.set(date, [...mapDataByDate, getTransaction(d)]);
   });
+  return Object.fromEntries(dataMap);
+}
 
-  return res.status(200).json({
-    total: {
-      income: 0,
-      expense: 0,
+async function findTransactions(startDate: Date, endDate: Date) {
+  const data = await prisma.transaction.findMany({
+    where: {
+      date: {
+        gte: startDate,
+        lte: endDate,
+      },
     },
-    dailyData: Object.fromEntries(dataMap),
   });
+  return data;
 }
 
 function getTransaction(d: Transaction) {
   return { ...d, id: d.id.toString() };
+}
+
+async function calculateTotal(startDate: Date, endDate: Date) {
+  return await prisma.transaction.groupBy({
+    by: ["type"],
+    _sum: {
+      amount: true,
+    },
+    where: {
+      date: {
+        gte: startDate,
+        lte: endDate,
+      },
+    },
+    orderBy: {
+      type: "asc",
+    },
+  });
 }
