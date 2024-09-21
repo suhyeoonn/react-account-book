@@ -17,7 +17,7 @@ export default async function CategoryList({
         .map((c) => (
           <CategoryListItem key={c.id} category={c} />
         ))}
-      <CategoryForm />
+      <CategoryForm type={type} />
     </ul>
   );
 }
