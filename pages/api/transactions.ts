@@ -22,8 +22,8 @@ export default async function handler(
 
   return res.status(200).json({
     total: {
-      income: income._sum.amount || 0,
-      expense: expense._sum.amount || 0,
+      income: income?._sum.amount || 0,
+      expense: expense?._sum.amount || 0,
     },
     dailyData: groupTransactionsByDate(data),
   });

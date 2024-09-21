@@ -1,25 +1,27 @@
 "use client";
 
 import MonthlySummary from "@/components/transaction/monthlySummary";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { TransactionResponse } from "@/lib/types";
 import TransactionList from "@/components/transaction/transactionList";
-import { Dayjs } from "dayjs";
 import axios from "axios";
+import { TransactionContext } from "@/lib/context/TransactionProvider";
 
-export default function MonthlyTransaction({ date }: { date: Dayjs }) {
+export default function MonthlyTransaction() {
+  const { date } = useContext(TransactionContext);
   const [data, setData] = useState<TransactionResponse>();
+
   useEffect(() => {
     (async () => {
       const { data } = await axios("/api/transactions", {
         params: { year: date.year(), month: date.month() },
       });
-      console.log(data);
       setData(data);
     })();
   }, [date]);
 
-  if (!data) return <p>거래 내역이 없습니다.</p>;
+  if (!data || Object.keys(data.dailyData).length === 0)
+    return <p>거래 내역이 없습니다.</p>;
 
   const { total, dailyData } = data;
 
