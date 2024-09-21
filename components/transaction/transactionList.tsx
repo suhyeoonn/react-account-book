@@ -20,7 +20,7 @@ export default function TransactionList({ dateString, transactions }: Props) {
     try {
       await axios.delete(`/api/transaction/${id}`);
       alert("삭제되었습니다");
-      // TODO: 삭제 후 데이터 리로드
+      // TODO: 삭제 후 데이터 리로드 훔...스토어를 사용해야할 것 같은데....
     } catch (err) {
       alert("Network Error");
       console.error(err);

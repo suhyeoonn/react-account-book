@@ -5,8 +5,9 @@ import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { cx } from "class-variance-authority";
 import { createCategory } from "@/lib/actions";
+import { TransactionType } from "@/lib/types";
 
-export default function CategoryForm() {
+export default function CategoryForm({ type }: { type: TransactionType }) {
   const [isShow, setIsShow] = useState(false);
   const [value, setValue] = useState("");
 
@@ -37,12 +38,13 @@ export default function CategoryForm() {
       {isShow && (
         <form action={handleCategoryAdd} className="flex flex-col gap-3">
           <Input
+            className="bg-white"
             placeholder="카테고리 이름 입력"
             value={value}
             onChange={({ target }) => setValue(target.value)}
             name="name"
           />
-          <input type="hidden" value={0} name="type" />
+          <input type="hidden" value={type} name="type" />
           <div className="space-x-3">
             <Button type="submit" disabled={!value}>
               Add
