@@ -3,7 +3,7 @@
 import { redirect } from "next/navigation";
 import prisma from "./prisma";
 import { revalidatePath } from "next/cache";
-import { FormTransaction } from "./types";
+import { FormTransaction, TransactionForm } from "./types";
 
 export const getCategoryList = async () => {
   return await prisma.category.findMany();
@@ -49,11 +49,17 @@ export const addTransaction = async (formData: FormData) => {
 
 export const fetchTransaction = async (id: string) => {
   try {
-    return await prisma.transaction.findFirst({
+    const data = await prisma.transaction.findFirst({
       where: {
         id: BigInt(id),
       },
     });
+
+    if (!data) {
+      throw new Error("fetchTransaction Error ");
+    }
+
+    return data;
   } catch (err) {
     console.error(err);
   }
