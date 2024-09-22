@@ -75,7 +75,7 @@ export function TransactionEntryForm({
         </div>
         <div className="flex w-full gap-3">
           <Button type="submit" className="flex-1">
-            Submit
+            Save
           </Button>
           <Button type="button" variant="outline" asChild>
             <Link href="/">Cancel</Link>

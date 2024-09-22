@@ -6,6 +6,7 @@ import { Input } from "../ui/input";
 import { cx } from "class-variance-authority";
 import { createCategory } from "@/lib/actions";
 import { TransactionType } from "@/lib/types";
+import { PlusIcon } from "@radix-ui/react-icons";
 
 export default function CategoryForm({ type }: { type: TransactionType }) {
   const [isShow, setIsShow] = useState(false);
@@ -26,14 +27,10 @@ export default function CategoryForm({ type }: { type: TransactionType }) {
       <button
         onClick={() => handleVisibleForm(true)}
         className={cx(
-          "flex p-2 opacity-0 transition duration-300  w-full text-sm text-red-500 justify-center font-medium items-center before:bg-red-500 before:h-px before:flex-grow before:mr-3 after:bg-red-500 after:h-px after:flex-grow after:ml-3",
-          {
-            "hover:opacity-0 cursor-default": isShow,
-            "cursor-pointer hover:opacity-100 ": !isShow,
-          }
+          "flex gap-1 p-2 transition duration-300 w-full text-sm text-gray-500 hover:text-red-500 justify-center font-medium items-center before:bg-gray-500 before:hover:bg-red-500 before:h-px before:flex-grow before:mr-3 after:bg-gray-500 after:hover:bg-red-500 after:h-px after:flex-grow after:ml-3"
         )}
       >
-        카테고리 추가
+        <PlusIcon /> 카테고리 추가
       </button>
       {isShow && (
         <form action={handleCategoryAdd} className="flex flex-col gap-3">
