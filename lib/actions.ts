@@ -3,9 +3,9 @@
 import { redirect } from "next/navigation";
 import prisma from "./prisma";
 import { revalidatePath } from "next/cache";
-import { FormTransaction, TransactionForm } from "./types";
+import { Category, FormTransaction } from "./types";
 
-export const getCategoryList = async () => {
+export const getCategoryList = async (): Promise<Category[]> => {
   return await prisma.category.findMany();
 };
 

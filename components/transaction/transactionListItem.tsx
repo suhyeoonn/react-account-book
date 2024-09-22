@@ -35,7 +35,7 @@ export default function TransactionListItem({
           <span className="text-sm text-muted-foreground">
             {data.category.name}
           </span>
-          <span className="font-medium leading-none">
+          <span className="leading-none">
             {data.content || data.category.name}
           </span>
           <span className={`${getColorByType(data.type)} text-right`}>
