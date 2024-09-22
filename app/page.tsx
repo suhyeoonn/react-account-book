@@ -4,7 +4,7 @@ import DateController from "@/components/transaction/dateController";
 import MonthlyTransaction from "@/components/transaction/monthlyTransaction";
 import { Button } from "@/components/ui/button";
 import TransactionProvider from "@/lib/context/TransactionProvider";
-import { GearIcon } from "@radix-ui/react-icons";
+import { GearIcon, PlusIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 
 export default function Home() {
@@ -21,7 +21,10 @@ export default function Home() {
                 </Link>
               </Button>
               <Button asChild>
-                <Link href="/transaction/add">Add</Link>
+                <Link href="/transaction/add">
+                  <PlusIcon className="mr-1" />
+                  Add
+                </Link>
               </Button>
             </div>
           </div>

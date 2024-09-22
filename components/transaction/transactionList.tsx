@@ -1,7 +1,7 @@
 "use client";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { getFormattedDate, sumAmont } from "@/hooks/transactionHooks";
+import { getFormattedDate, sumAmount } from "@/hooks/transactionHooks";
 import { Transaction, TransactionType } from "@/lib/types";
 import { EXPENSE_TEXT_COLOR } from "@/lib/utils";
 import TransactionListItem from "./transactionListItem";
@@ -42,15 +42,17 @@ export default function TransactionList({ dateString, transactions }: Props) {
               </span>
             </div>
             <div className="flex gap-5">
-              <span className="text-blue-500 font-medium">
+              <span className="text-blue-500 font-medium tracking-wide">
                 <CurrencyWon
-                  value={sumAmont(transactions, TransactionType.INCOME)}
+                  value={sumAmount(transactions, TransactionType.INCOME)}
                   displayType="text"
                 />
               </span>
-              <span className={`${EXPENSE_TEXT_COLOR} font-medium`}>
+              <span
+                className={`${EXPENSE_TEXT_COLOR} font-medium tracking-wide`}
+              >
                 <CurrencyWon
-                  value={sumAmont(transactions, TransactionType.EXPENSE)}
+                  value={sumAmount(transactions, TransactionType.EXPENSE)}
                   displayType="text"
                 />
               </span>

@@ -9,7 +9,7 @@ export const getColorByType = (type: TransactionType) => {
     : EXPENSE_TEXT_COLOR;
 };
 
-export const sumAmont = (data: Transaction[], type: TransactionType) => {
+export const sumAmount = (data: Transaction[], type: TransactionType) => {
   return data.reduce(
     (total, d) => (total += d.type === type ? d.amount : 0),
     0

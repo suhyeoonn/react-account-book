@@ -6,7 +6,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./select";
-import { category } from "@/lib/placeholder-data";
+import { getCategoryList } from "@/lib/actions";
+import { useEffect, useState } from "react";
+import { Category } from "@/lib/types";
 
 interface Props {
   type: number;
@@ -14,6 +16,16 @@ interface Props {
 }
 
 export default function CategorySelect({ type, defaultValue }: Props) {
+  // TODO: react query
+  const [categoryList, setCategoryList] = useState<Category[] | null>(null);
+  useEffect(() => {
+    (async () => {
+      setCategoryList(await getCategoryList());
+    })();
+  }, []);
+
+  if (!categoryList) return null;
+
   return (
     <Select name="categoryId" defaultValue={defaultValue}>
       <SelectTrigger className="bg-white">
@@ -21,7 +33,7 @@ export default function CategorySelect({ type, defaultValue }: Props) {
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
-          {category
+          {categoryList
             .filter((c) => c.type === type)
             .map((c) => (
               <SelectItem value={c.id + ""} key={c.id}>
