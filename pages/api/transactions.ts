@@ -1,5 +1,5 @@
 import prisma from "@/lib/prisma";
-import { TransactionResponse } from "@/lib/types";
+import { TransactionResponse, TransactionType } from "@/lib/types";
 import { Transaction } from "@prisma/client";
 import dayjs from "dayjs";
 import { NextApiRequest, NextApiResponse } from "next";
@@ -60,6 +60,9 @@ async function findTransactions(startDate: Date, endDate: Date) {
         lte: endDate,
       },
     },
+    orderBy: {
+      date: "desc",
+    },
   });
   return data;
 }
@@ -69,7 +72,7 @@ function getTransaction(d: Transaction) {
 }
 
 async function calculateTotal(startDate: Date, endDate: Date) {
-  return await prisma.transaction.groupBy({
+  const data = await prisma.transaction.groupBy({
     by: ["type"],
     _sum: {
       amount: true,
@@ -84,4 +87,9 @@ async function calculateTotal(startDate: Date, endDate: Date) {
       type: "asc",
     },
   });
+
+  return [
+    data.filter(({ type }) => type === TransactionType.INCOME)[0],
+    data.filter(({ type }) => type === TransactionType.EXPENSE)[0],
+  ];
 }
