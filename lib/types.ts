@@ -39,6 +39,12 @@ export interface TransactionForm {
   type: TransactionType;
   date: Date;
   categoryId: string;
-  content: string;
+  content: string | null;
   amount: string;
+}
+
+export interface TransactionEditFormType
+  extends Omit<TransactionForm, "id" | "categoryId"> {
+  id: bigint;
+  categoryId: number;
 }
