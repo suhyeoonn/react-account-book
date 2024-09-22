@@ -10,7 +10,7 @@ import { category } from "@/lib/placeholder-data";
 
 interface Props {
   type: number;
-  defaultValue: string;
+  defaultValue?: string;
 }
 
 export default function CategorySelect({ type, defaultValue }: Props) {

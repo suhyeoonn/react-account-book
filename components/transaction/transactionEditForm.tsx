@@ -5,8 +5,7 @@ import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import CategorySelect from "../ui/CategorySelect";
 import { useState } from "react";
-import { TransactionForm, TransactionType } from "@/lib/types";
-import { DatePicker } from "../ui/datePicker";
+import { TransactionEditFormType } from "@/lib/types";
 import TransactionTypeToggle from "./transactionTypeToggle";
 import CurrencyWon from "../ui/currencyInputWon";
 import { Label } from "@radix-ui/react-label";
@@ -27,26 +26,15 @@ import dayjs from "dayjs";
 // });
 
 export function TransactionEditForm({
-  data = {
-    id: null,
-    amount: "",
-    categoryId: "",
-    type: TransactionType.EXPENSE,
-    date: new Date(),
-    content: "",
-  },
+  data,
   handleSubmit,
 }: {
-  data: TransactionForm;
+  data: TransactionEditFormType;
   handleSubmit: (form: FormData) => void;
 }) {
   const [type, setType] = useState(data.type);
   const handleType = (value: string) => {
     setType(+value);
-  };
-
-  const changeHandler = (e) => {
-    setData;
   };
 
   return (
@@ -68,7 +56,7 @@ export function TransactionEditForm({
         </div>
         <div className="flex flex-col gap-2">
           <Label>분류</Label>
-          <CategorySelect type={type} defaultValue={data.categoryId} />
+          <CategorySelect type={type} defaultValue={data.categoryId + ""} />
         </div>
         <div className="flex flex-col gap-2">
           <Label>금액</Label>
@@ -76,7 +64,7 @@ export function TransactionEditForm({
         </div>
         <div className="flex flex-col gap-2">
           <Label>내용</Label>
-          <Input name="content" defaultValue={data.content} />
+          <Input name="content" defaultValue={data.content + ""} />
         </div>
         <div className="flex w-full gap-3">
           <Button type="submit" className="flex-1">
