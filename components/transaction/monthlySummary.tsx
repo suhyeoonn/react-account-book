@@ -2,7 +2,7 @@
 
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { TransactionMonthlyTotal } from "@/lib/types";
-import { EXPENSE_TEXT_COLOR, INCOME_TEXT_COLOR } from "@/lib/utils";
+import { INCOME_TEXT_COLOR } from "@/lib/utils";
 import CurrencyWon from "../ui/currencyInputWon";
 
 export default function MonthlySummary({
@@ -25,7 +25,7 @@ export default function MonthlySummary({
         <CardHeader className="p-2 tracking-tight text-sm font-medium">
           지출
         </CardHeader>
-        <CardContent className={`${EXPENSE_TEXT_COLOR} p-2 text-xl font-bold`}>
+        <CardContent className="text-expense p-2 text-xl font-bold">
           <CurrencyWon value={expense} displayType="text" />
         </CardContent>
       </Card>

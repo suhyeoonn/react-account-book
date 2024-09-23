@@ -3,7 +3,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getFormattedDate, sumAmount } from "@/hooks/transactionHooks";
 import { Transaction, TransactionType } from "@/lib/types";
-import { EXPENSE_TEXT_COLOR } from "@/lib/utils";
 import TransactionListItem from "./transactionListItem";
 import CurrencyWon from "../ui/currencyInputWon";
 import dayjs from "dayjs";
@@ -48,9 +47,7 @@ export default function TransactionList({ dateString, transactions }: Props) {
                   displayType="text"
                 />
               </span>
-              <span
-                className={`${EXPENSE_TEXT_COLOR} font-medium tracking-wide`}
-              >
+              <span className="text-expense font-medium tracking-wide">
                 <CurrencyWon
                   value={sumAmount(transactions, TransactionType.EXPENSE)}
                   displayType="text"

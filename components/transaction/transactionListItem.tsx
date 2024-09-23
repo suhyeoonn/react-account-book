@@ -1,7 +1,6 @@
 "use client";
 
-import { getColorByType } from "@/hooks/transactionHooks";
-import { Transaction } from "@/lib/types";
+import { Transaction, TransactionType } from "@/lib/types";
 import { Cross2Icon } from "@radix-ui/react-icons";
 import ConfirmDialog from "../ui/confirm-dialog";
 import { useState } from "react";
@@ -38,7 +37,13 @@ export default function TransactionListItem({
           <span className="leading-none">
             {data.content || data.category.name}
           </span>
-          <span className={`${getColorByType(data.type)} text-right`}>
+          <span
+            className={`${
+              data.type === TransactionType.INCOME
+                ? "text-income"
+                : "text-expense"
+            } text-right`}
+          >
             <CurrencyWon value={data.amount} displayType="text" />
           </span>
         </Link>
