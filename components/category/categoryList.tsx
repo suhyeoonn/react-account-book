@@ -12,12 +12,13 @@ export default async function CategoryList({
 
   return (
     <ul>
+      <CategoryForm type={type} />
+
       {categoryList
         .filter((c) => c.type === type)
         .map((c) => (
           <CategoryListItem key={c.id} category={c} />
         ))}
-      <CategoryForm type={type} />
     </ul>
   );
 }

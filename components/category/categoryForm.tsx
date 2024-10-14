@@ -27,7 +27,7 @@ export default function CategoryForm({ type }: { type: TransactionType }) {
       <button
         onClick={() => handleVisibleForm(true)}
         className={cx(
-          "flex gap-1 p-2 transition duration-300 w-full text-sm text-gray-500 hover:text-red-500 justify-center font-medium items-center before:bg-gray-500 before:hover:bg-red-500 before:h-px before:flex-grow before:mr-3 after:bg-gray-500 after:hover:bg-red-500 after:h-px after:flex-grow after:ml-3"
+          "flex gap-1 p-2 transition duration-300 w-full text-sm text-gray-600 hover:text-red-500 justify-center font-medium items-center before:bg-gray-200 before:hover:bg-red-500 before:h-px before:flex-grow before:mr-3 after:bg-gray-200 after:hover:bg-red-500 after:h-px after:flex-grow after:ml-3"
         )}
       >
         <PlusIcon /> 카테고리 추가
