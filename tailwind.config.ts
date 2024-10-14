@@ -20,7 +20,7 @@ const config = {
     extend: {
       textColor: {
         expense: "theme(colors.red.500)",
-        income: "text-blue-500",
+        income: "theme(colors.blue.500)",
       },
       colors: {
         border: "hsl(var(--border))",

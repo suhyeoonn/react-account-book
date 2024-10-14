@@ -61,7 +61,7 @@ async function findTransactions(startDate: Date, endDate: Date) {
       },
     },
     orderBy: {
-      date: "desc",
+      id: "desc",
     },
   });
   return data;
